@@ -1,0 +1,250 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>使い方 | Ovice Quick Reactions（Tampermonkey 版）</title>
+<meta name="description" content="Oviceのリアクションを、キーボードの Ctrl+Shift+数字・常に手前に出る小窓・画面に浮かぶパネルから送れる無料のツール（Tampermonkey 用）。">
+<link rel="icon" href="icon128.png">
+<link rel="stylesheet" href="manual.css">
+<style>
+  /* Tampermonkey の入れ方(リベ チャット フォルダーの使い方ページと同じ形) */
+  .install-steps{list-style:none;counter-reset:s;margin:16px 0 0;padding:0}
+  .install-steps>li{counter-increment:s;position:relative;padding:0 0 22px 44px;color:var(--fg)}
+  .install-steps>li::before{content:counter(s);position:absolute;left:0;top:0;width:30px;height:30px;border-radius:50%;background:var(--accent);color:#fff;font-weight:800;display:grid;place-items:center}
+  .install-steps b{font-size:17px}
+  .btn{display:inline-block;margin:8px 0;padding:10px 20px;border-radius:8px;background:var(--accent-2);color:#fff;font-weight:800;text-decoration:none}
+  .btn.blue{background:var(--accent)}
+  .btn:hover{filter:brightness(.94)}
+  img.allow{display:block;width:380px;max-width:100%;margin:8px 0 4px;border:1px solid var(--line-strong);border-radius:8px}
+  img.allow.wide{width:640px}
+  .small{font-size:14px;color:var(--muted)}
+  table.diff{width:100%;border-collapse:collapse;margin:12px 0;font-size:15px}
+  table.diff th,table.diff td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
+  table.diff th{background:var(--soft)}
+  .launch-row{display:flex;gap:18px;align-items:center;flex-wrap:wrap}
+  .launch-row img{width:90px;border:1px solid var(--line);border-radius:8px}
+  footer{color:var(--muted);font-size:12px;text-align:center;padding:10px 0 40px}
+</style>
+</head>
+<body>
+<header class="topbar">
+  <div class="topbar-inner">
+    <a class="topbar-brand" href="#"><img class="app-icon" src="icon128.png" width="36" height="36" alt=""><span>Ovice Quick Reactions</span></a>
+    <nav class="topbar-nav"><a href="#install">入れ方</a><a href="#send">使い方</a><a href="#trouble">困ったとき</a></nav>
+  </div>
+</header>
+
+<main class="manual-main">
+  <section class="intro">
+    <p class="eyebrow">Tampermonkey 版の入れ方と使い方</p>
+    <h1>キーを押すだけで、<br class="mobile-only">リアクションが一瞬で届く。</h1>
+    <p class="lead">Oviceのリアクション（いいね・拍手など）を、キーボードの <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>数字</kbd> で送れるようにする無料のツールです。どのキーで何を送るかは、Oviceの画面に浮かぶパネルでいつでも見られます。</p>
+    <figure class="hero-visual">
+      <img src="img/hero.webp" width="1536" height="1024" alt="遊牧民くんがキーボードのキーを押すと、いいね・ハート・拍手のリアクションが会議の画面へ飛んでいく絵">
+      <figcaption>キーを押す → リアクションが一瞬でOviceへ届く</figcaption>
+    </figure>
+    <div class="flow" aria-label="使い始めるまでの3ステップ">
+      <div class="flow-step"><span class="step-no">1</span><b>Tampermonkey を入れる</b><span>Chrome に「ユーザースクリプト」を動かす拡張機能を入れます（無料）。</span></div>
+      <div class="flow-step"><span class="step-no">2</span><b>このツールを入れる</b><span>緑のボタンを押して「インストール」を押すだけです。</span></div>
+      <div class="flow-step"><span class="step-no">3</span><b>Oviceを開き直す</b><span>右端に ⚡ と ⌨ のボタンが出たら完了。<kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>1</kbd> で送れます。</span></div>
+    </div>
+  </section>
+
+  <div class="doc-layout">
+    <aside class="toc" aria-label="目次">
+      <strong>目次</strong>
+      <a href="#install">入れ方（5分）</a>
+      <a href="#start">始める前に</a>
+      <a href="#send">キーで送る</a>
+      <a href="#assign">割り当てを変える</a>
+      <a href="#window">⚡の小窓で送る</a>
+      <a href="#panel-send">パネルから送る</a>
+      <a href="#narrow">細い表示にする</a>
+      <a href="#keys">キーについて</a>
+      <a href="#diff">拡張機能版との違い</a>
+      <a href="#trouble">困ったとき</a>
+      <a href="#privacy">保存するもの・やめ方</a>
+    </aside>
+
+    <article>
+      <section class="guide-section" id="install">
+        <div class="section-head"><div><h2>入れ方（5分）</h2><p>Chrome の拡張機能「Tampermonkey（タンパーモンキー）」の上で動きます。パソコンの Chrome で進めてください。</p></div><img src="img/yubokumin-book.webp" width="118" height="118" alt="本を開いて案内する遊牧民くん" loading="lazy"></div>
+        <div class="tip"><b>やることは2つだけ</b>です。Tampermonkey を入れる（①②）と、このページの緑のボタンを押す（③）。Tampermonkey をもう使っている人は ③ からで大丈夫です。</div>
+        <ol class="install-steps">
+          <li><b>Tampermonkey を入れる</b><br>
+            Chrome ウェブストアは、Chrome に機能を足す「拡張機能」を配っている Google の公式のお店です。<br>
+            <a class="btn blue" href="https://chromewebstore.google.com/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo" target="_blank" rel="noopener">Chrome ウェブストアの Tampermonkey を開く</a><br>
+            右上の青い「Chrome に追加」→「拡張機能を追加」を押します。もう入っている人は「Chrome から削除」と出ているので、次へ。
+            <img class="allow wide" src="img/store.jpg" alt="Chrome ウェブストアの Tampermonkey のページ。右上の青いボタンを赤丸で示す" loading="lazy"></li>
+          <li><b>Tampermonkey に「ユーザースクリプト」を許可する</b><br>
+            Chrome のアドレス欄（画面の一番上の、URL が出ている所）に <code>chrome://extensions</code> と打って Enter。拡張機能の一覧で、Tampermonkey の「詳細」を押します。
+            <img class="allow wide" src="img/ext_detail.jpg" alt="拡張機能の一覧。Tampermonkey の詳細ボタンを赤丸で示す" loading="lazy">
+            「ユーザー スクリプトを許可する」をオンにします。
+            <img class="allow" src="img/allow.jpg" alt="Tampermonkey の詳細画面。ユーザー スクリプトを許可するのスイッチを赤丸で示す" loading="lazy">
+            <span class="small">この項目が無い古い Chrome の場合は、右上の「デベロッパー モード」をオンにします。</span></li>
+          <li><b>このツールを入れる</b><br>
+            <a class="btn" href="https://raw.githubusercontent.com/yubokumin28/ovice-quick-reactions-userscript/main/ovice-quick-reactions.user.js">Ovice Quick Reactions をインストール</a><br>
+            Tampermonkey の「ユーザー スクリプトのインストール」の画面が開くので、左下の「インストール」を押します。<br>
+            <span class="small">右に「悪意があるスクリプトは…」と注意書きが出ますが、Tampermonkey がどのスクリプトでも出す決まりの文です。「作者」が遊牧民、「INCLUDE」が app.ovice.com/* なら本物です。</span></li>
+          <li><b>Oviceを開き直す</b><br>
+            Oviceのタブで、ブラウザの更新ボタン（アドレス欄の左の ↻。キーボードなら <kbd>F5</kbd>）を押します。画面の右端に青い <b>⚡</b> と緑の <b>⌨</b> のボタンが出て、キーとリアクションのパネルが開いたら完了です。</li>
+        </ol>
+        <div class="tip">新しい版は Tampermonkey が自動で取りに来ます。キーの割り当てや付けた名前は、更新しても消えません。</div>
+      </section>
+
+      <section class="guide-section" id="start">
+        <h2>始める前に</h2>
+        <div class="launch-row">
+          <img src="img/shot-launch.png" width="90" height="166" alt="Oviceの画面の右端に出るボタン。上が⚡、下が⌨" loading="lazy">
+          <div>
+            <ul class="checklist">
+              <li>ChromeでOviceのスペースが開いている</li>
+              <li>右端の <b>⌨</b>（写真の<span class="n">1</span>）を押すと、キーとリアクションのパネルが開く・閉じる</li>
+              <li>右端の <b>⚡</b>（写真の<span class="n">2</span>）を押すと、常に手前に出る小窓が開く</li>
+            </ul>
+            <p class="small">パネルは上の帯（⠿ Ovice リアクション）をつかむと動かせます。置いた場所は次に開いた時も同じです。右上の 🐒 Tampermonkey のアイコンのメニューからも、パネルの開閉と使い方ページを開けます。</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="guide-section" id="send">
+        <div class="section-head"><div><h2>キーで送る</h2><p>初めは1〜10番に、Oviceのリアクション列の左から順に割り当てられています。</p></div><img src="img/yubokumin-point.webp" width="118" height="118" alt="右を指して案内する遊牧民くん" loading="lazy"></div>
+        <div class="legend" aria-label="写真の印の見方"><span><i class="ring"></i>赤丸＝押す場所</span><span><span class="n">1</span><span class="n">2</span>＝操作する順番</span></div>
+        <div class="step-block">
+          <div class="step-copy"><strong>対応表を見て、キーを押す</strong>
+            <ol class="num-steps">
+              <li><span class="n">1</span><span>パネルの<b>左の列がキー</b>、<b>右の列が送られるリアクション</b>です<small>例：<kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>2</kbd> で「いいね」が送られます。</small></span></li>
+              <li><span class="n">2</span><span>Oviceの画面で、そのキーを押す</span></li>
+            </ol>
+            <ul class="checklist">
+              <li>画面下のリアクション列（😊）を閉じていても送れます。送る瞬間だけ開き、約1.5秒で元どおり閉じます</li>
+              <li>チャット欄に文字を打っている途中でも、キーで送れます</li>
+            </ul>
+          </div>
+          <figure class="shot"><img src="img/shot-table.png" width="368" height="760" alt="パネルの対応表。いいねの行に赤丸が付いた画面" loading="lazy"><figcaption>左がキー、右が送られるリアクションです。</figcaption></figure>
+        </div>
+      </section>
+
+      <section class="guide-section" id="assign">
+        <h2>割り当てを変える</h2>
+        <p>やり方は3通りあります。どれで変えても同じ結果になります。</p>
+        <div class="steps">
+          <div class="step-block">
+            <div class="step-copy"><strong>1. 対応表から変える（1つだけ変えたい時）</strong>
+              <ol class="num-steps">
+                <li><span class="n">1</span><span>対応表で、変えたい行の<b>リアクション</b>を押す<small>その行の下に、選べるリアクションが並びます。</small></span></li>
+                <li><span class="n">2</span><span>並んだ中から、送りたいリアクションを押す（写真の<span class="n">1</span>）</span></li>
+                <li><span class="n">3</span><span>そのキーを使わないなら<b>「外す」</b>を押す（写真の<span class="n">2</span>）</span></li>
+              </ol>
+            </div>
+            <figure class="shot"><img src="img/shot-picker.png" width="368" height="760" alt="いいねの行を開き、拍手と外すに赤丸が付いた画面" loading="lazy"><figcaption>①別のリアクションに替える　②このキーを空ける</figcaption></figure>
+          </div>
+          <div class="step-block reverse">
+            <div class="step-copy"><strong>2. 一覧から番号を選ぶ（まとめて見直したい時）</strong>
+              <ol class="num-steps">
+                <li><span class="n">1</span><span>パネルの<b>「割り当てを変える」</b>を見る<small>青い行が、キーに割り当て済みのリアクションです。</small></span></li>
+                <li><span class="n">2</span><span>リアクションの右の欄で、使いたい番号を選ぶ</span></li>
+              </ol>
+              <div class="tip">同じ番号を別のリアクションに選ぶと、前のリアクションは「－」（割り当てなし）に戻ります。リアクションの名前は押すと書き換えられます（空にすると元の名前）。</div>
+            </div>
+            <figure class="shot"><img src="img/shot-assign.png" width="368" height="722" alt="割り当てを変えるの一覧で、番号欄に赤丸が付いた画面" loading="lazy"><figcaption>「－」の欄で番号を選ぶと、そのキーに割り当てられます。</figcaption></figure>
+          </div>
+        </div>
+        <div class="tip">3つ目は、Oviceの ⚙ →「リアクション設定」です。「使用」の左に「ショートカット」の欄が足されるので、そこで番号を選べます（Oviceを日本語表示で使っている時だけ出ます）。</div>
+      </section>
+
+      <section class="guide-section" id="window">
+        <h2>⚡の小窓で送る</h2>
+        <p>キーを覚えなくても、マウスで押して送れる小窓です。ExcelやPDFなど、ほかのアプリより常に手前に出ます。</p>
+        <ol class="num-steps">
+          <li><span class="n">1</span><span>Oviceの画面の右端にある、青い<b>⚡</b>を押す</span></li>
+          <li><span class="n">2</span><span>小窓に並んだリアクションを押すと送られる<small>長押しすると、約1秒に5回の速さで続けて送れます。</small></span></li>
+          <li><span class="n">3</span><span>アイコン左上の<span class="hl">赤い数字</span>が、割り当てたキーの番号です</span></li>
+        </ol>
+        <div class="tip">Oviceのリアクションを増やしたり並べ替えたりした時は、小窓の<b>「再読込」</b>を押すと並びが最新になります。薄く表示されたアイコンは、Oviceが連続送信を止めている最中なので、少し待ってから押します。</div>
+      </section>
+
+      <section class="guide-section" id="panel-send">
+        <h2>パネルから押して送る</h2>
+        <div class="step-block">
+          <div class="step-copy"><strong>押して送る</strong>
+            <ol class="num-steps">
+              <li><span class="n">1</span><span>パネルのいちばん上の<b>「押して送る」</b>に並んだリアクションを押す<small>長押しすると、約1秒に5回の速さで続けて送れます。</small></span></li>
+              <li><span class="n">2</span><span>ボタンの下に「送りました：いいね」と出れば届いています</span></li>
+              <li><span class="n">3</span><span>右上の<b>「シンプル」</b>を押すと、送るボタンだけの細い表示になります</span></li>
+            </ol>
+          </div>
+          <figure class="shot"><img src="img/shot-send.png" width="368" height="240" alt="押して送るのいいねボタン、送りましたの表示、シンプルボタンに赤丸と番号が付いた画面" loading="lazy"><figcaption>①押して送る　②届いたかの表示　③送るボタンだけにする</figcaption></figure>
+        </div>
+      </section>
+
+      <section class="guide-section" id="narrow">
+        <h2>細い表示にする</h2>
+        <div class="step-block">
+          <div class="step-copy"><strong>送るボタンだけを縦一列に</strong>
+            <ol class="num-steps">
+              <li><span class="n">1</span><span>上の帯をつかんでドラッグすると、パネルが動きます</span></li>
+              <li><span class="n">2</span><span><b>「戻す」</b>を押すと、対応表つきの表示に戻ります</span></li>
+            </ol>
+            <ul class="checklist">
+              <li>選んだ表示と置いた場所は、次に開いた時も同じです</li>
+              <li><b>📌</b> を押すと、送るボタンが「常に手前の小窓」に移ります。小窓を閉じるとパネルに戻ります</li>
+            </ul>
+          </div>
+          <figure class="shot narrow"><img src="img/shot-narrow.png" width="108" height="694" alt="細い表示のパネル。上の帯と戻すボタンに赤丸と番号が付いている" loading="lazy"><figcaption>①つかんで動かす　②戻す</figcaption></figure>
+        </div>
+      </section>
+
+      <section class="guide-section" id="keys">
+        <div class="section-head"><div><h2>キーについて</h2><p>Tampermonkey 版のキーは決まっています。</p></div><img src="img/yubokumin-book.webp" width="118" height="118" alt="本で説明する遊牧民くん" loading="lazy"></div>
+        <div class="priority">
+          <div class="priority-item"><b>01〜09 番</b><span><kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>1</kbd>〜<kbd>9</kbd></span></div>
+          <div class="priority-item"><b>10 番</b><span><kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>0</kbd></span></div>
+          <div class="priority-item"><b>Mac</b><span><kbd>Ctrl</kbd> の代わりに <kbd>⌘</kbd>。ただし <kbd>⌘</kbd>+<kbd>Shift</kbd>+<kbd>3</kbd>〜<kbd>5</kbd> は Mac の画面撮影に使われるので効きません</span></div>
+        </div>
+        <ul class="checklist">
+          <li>キーが効くのは、<b>Oviceの画面を見ている時だけ</b>です。ほかのアプリや別のタブを見ている時は効きません</li>
+          <li>ほかの画面を見ながら送りたい時は、<a href="#window">⚡の小窓</a>を使います（常に手前に出ます）</li>
+          <li>キーの組み合わせは変えられません。何番に何を送るかは<a href="#assign">割り当て</a>で変えます</li>
+        </ul>
+      </section>
+
+      <section class="guide-section" id="diff">
+        <h2>Chrome 拡張機能版との違い</h2>
+        <p>以前の Chrome 拡張機能版（Ovice Quick Reactions 1.6 まで）と比べて、次の点が違います。</p>
+        <table class="diff">
+          <tr><th>拡張機能版</th><th>Tampermonkey 版</th></tr>
+          <tr><td>キーの範囲を「グローバル」にすると、ほかのアプリを見ていても効く</td><td>Oviceの画面を見ている時だけ効く</td></tr>
+          <tr><td>キーの組み合わせを chrome://extensions/shortcuts で変えられる</td><td>Ctrl+Shift+1〜9・0 に決まっている</td></tr>
+          <tr><td>右のサイドパネル・細い別窓は、どのタブを見ていても使える</td><td>パネルはOviceの画面の中に浮かぶ（Oviceのタブを見ている時だけ見える）</td></tr>
+          <tr><td>割り当ては同じGoogleアカウントのChrome同士で引き継がれる</td><td>そのパソコンの Tampermonkey の中だけに保存される</td></tr>
+        </table>
+        <div class="tip warning">拡張機能版と両方入れていても、先に動いた方だけが働きます（ボタンが2つ出たり、2回送られたりはしません）。拡張機能版で決めた割り当ては自動では移らないので、Tampermonkey 版で一度決め直してください。</div>
+      </section>
+
+      <section class="guide-section" id="trouble">
+        <div class="section-head"><div><h2>困ったとき</h2><p>よくある原因と、最初に試すことです。</p></div><img src="img/yubokumin-talk.webp" width="118" height="118" alt="マイクを持って説明する遊牧民くん" loading="lazy"></div>
+        <details><summary>⚡ と ⌨ のボタンが出ない</summary><p>入れ方の②「ユーザー スクリプトを許可する」がオンか確かめて、Oviceの画面でブラウザの更新ボタン（↻）を押してください。Chrome 拡張機能版も入れている時は、そちらが先に動いています（Tampermonkey のメニューに「拡張版が動いているため休んでいます」と出ます）。</p></details>
+        <details><summary>キーを押しても送られない</summary><p>Oviceの画面を一度クリックしてから押してください。キーが効くのはOviceの画面を見ている時だけです。⚡ の小窓を前に出している時は、小窓のボタンを押して送ります。</p></details>
+        <details><summary>「リアクションボタンが見つかりません」と出る</summary><p>画面下のリアクション列（😊）を一度開いた状態で、もう一度押してください。</p></details>
+        <details><summary>急に動かない・表示がおかしい</summary><p>① <code>chrome://extensions</code> を開き、右上の「デベロッパー モード」をオン → 左上の「更新」を押す ② Oviceに戻ってブラウザの更新ボタン（↻）を押す。<img class="allow wide" src="img/ext_update.jpg" alt="拡張機能の一覧の上。左上の更新ボタンと右上のデベロッパーモードを赤丸で示す" loading="lazy"></p></details>
+        <details><summary>会社のパソコンでスイッチが押せない</summary><p>会社から配られたパソコンは、会社の管理者が Chrome の設定を決めていることがあります。「ユーザー スクリプトを許可する」やデベロッパー モードが押せない時は、そのパソコンでは使えません。勝手に変えようとせず、会社の管理者に相談してください。</p></details>
+        <details><summary>自分には音が聞こえない</summary><p>リアクションの音はOvice側の設定です。Oviceの ⚙ →「オーディオ設定」→「音量調整オプション」の「通知音」と、「リアクション設定」の効果音を確かめてください。</p></details>
+      </section>
+
+      <section class="guide-section" id="privacy">
+        <h2>保存するもの・やめ方</h2>
+        <ul class="checklist">
+          <li>保存するのは「何番にどのリアクションを割り当てたか」「リアクションに付けた名前」「表示の選び方とパネルの場所」だけ</li>
+          <li>保存先はそのパソコンの Tampermonkey の中です。ほかのパソコンとは自動でつながりません</li>
+          <li>Oviceの会話や画面の中身を、外へ送ることはありません</li>
+          <li>やめる時は、右上の 🐒 Tampermonkey のアイコン → このツールのスイッチをオフにするか、ダッシュボードから削除します</li>
+        </ul>
+      </section>
+    </article>
+  </div>
+</main>
+<footer>Ovice Quick Reactions（Tampermonkey 版）｜作: 遊牧民｜oVice 公式のツールではありません</footer>
+</body>
+</html>
